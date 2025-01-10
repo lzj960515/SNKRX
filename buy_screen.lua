@@ -39,6 +39,12 @@ end
 
 
 function BuyScreen:on_enter(from, level, loop, units, passives, shop_level, shop_xp)
+  slow_amount = 1
+  trigger:tween(2, main_song_instance, {volume = 0.5, pitch = 1}, math.linear)
+
+  -- steam.friends.setRichPresence('steam_display', '#StatusFull')  -- 注释掉Steam Rich Presence
+  -- steam.friends.setRichPresence('text', 'Shop - Level ' .. level)  -- 注释掉Steam Rich Presence
+
   self.level = level
   self.loop = loop
   self.units = units
@@ -49,9 +55,6 @@ function BuyScreen:on_enter(from, level, loop, units, passives, shop_level, shop
   max_units = math.clamp(7 + current_new_game_plus + self.loop, 7, 12)
 
   input:set_mouse_visible(true)
-
-  steam.friends.setRichPresence('steam_display', '#StatusFull')
-  steam.friends.setRichPresence('text', 'Shop - Level ' .. self.level)
 
   self.main = Group()
   self.effects = Group()
