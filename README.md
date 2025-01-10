@@ -1,20 +1,16 @@
+# SNKRX中文版
 
+[SNKRX](https://store.steampowered.com/app/915310/SNKRX/) 是一款街机射击类Roguelite游戏，你可以控制一条由自动攻击附近敌人的英雄组成的蛇。
+组合不同的英雄以解锁职业加成并创建独特的构建，指引你无敌的队伍冲破无尽的敌人浪潮。
 
-
-
-# SNKRX
-
-[SNKRX](https://store.steampowered.com/app/915310/SNKRX/) is an arcade shooter roguelite where you control a snake of heroes that automatically attack nearby enemies.
-Combine different heroes to unlock class bonuses and create unique builds, and steer your unstoppable party as they ravage through endless waves of enemies.
+[English Version](README_EN.md)
 
 https://user-images.githubusercontent.com/409773/119258159-ea982b00-bb9e-11eb-8082-37e2c65591ea.mp4
 
-[**Check it out on Steam!**](https://store.steampowered.com/app/915310/SNKRX/)
+### 运行方法
 
-### Running
+下载此仓库，进入目录后运行 `engine/love/love.exe --console .` 即可。无需启动Steam。
 
-Download this repository, `cd` into it and then run `engine/love/love.exe --console .`. You need to have Steam up to run it successfully.
+### 许可证
 
-### LICENSE
-
-All assets have their specific licenses and they are linked to in the game's credits. All code is under the MIT license.
+所有资源都有其特定的许可证，可在游戏的制作人员名单中找到相关链接。所有代码均采用MIT许可证。
