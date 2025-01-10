@@ -1,3 +1,4 @@
+local utf8 = require("utf8")
 -- A generic text object.
 -- It implements a character based tagging system which should allow you to implement any kind of text effect possible, from setting a character's color to making it become visible, shake and play sounds.
 -- You would use it like this:
@@ -167,6 +168,7 @@ end
 
 function Text:parse(text_data)
   for _, line in ipairs(text_data) do
+    print(line.text)
     local tags = {}
     for i, tags_text, j in line.text:gmatch("()%[(.-)%]()") do
       if tags_text == "" then

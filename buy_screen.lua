@@ -594,9 +594,10 @@ Button = Object:extend()
 Button:implement(GameObject)
 function Button:init(args)
   self:init_game_object(args)
-  self.shape = Rectangle(self.x, self.y, args.w or (pixul_font:get_text_width(self.button_text) + 8), pixul_font.h + 4)
+  print(self.button_text)
+  self.shape = Rectangle(self.x, self.y, args.w or (chinese_font:get_text_width(self.button_text) + 8), chinese_font.h + 4)
   self.interact_with_mouse = true
-  self.text = Text({{text = '[' .. self.fg_color .. ']' .. self.button_text, font = pixul_font, alignment = 'center'}}, global_text_tags)
+  self.text = Text({{text = '[' .. self.fg_color .. ']' .. self.button_text, font = chinese_font, alignment = 'center'}}, global_text_tags)
 end
 
 

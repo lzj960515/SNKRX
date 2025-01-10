@@ -6,7 +6,6 @@ function MainMenu:init(name)
   self:init_game_object()
 end
 
-
 function MainMenu:on_enter(from)
   slow_amount = 1
   trigger:tween(2, main_song_instance, {volume = 0.5, pitch = 1}, math.linear)
@@ -109,7 +108,7 @@ function MainMenu:on_enter(from)
       main:go_to('buy_screen', run.level or 1, run.loop or 0, run.units or {}, passives, run.shop_level or 1, run.shop_xp or 0)
     end, text = Text({{text = '[wavy, ' .. tostring(state.dark_transitions and 'fg' or 'bg') .. ']starting...', font = pixul_font, alignment = 'center'}}, global_text_tags)}
   end}
-  self.options_button = Button{group = self.main_ui, x = 47, y = gh/2 + 12, force_update = true, button_text = 'options', fg_color = 'bg10', bg_color = 'bg', action = function(b)
+  self.options_button = Button{group = self.main_ui, x = 47, y = gh/2 + 12, force_update = true, button_text = '设置', fg_color = 'bg10', bg_color = 'bg', action = function(b)
     if not self.paused then
       open_options(self)
     else
