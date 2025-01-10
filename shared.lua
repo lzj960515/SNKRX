@@ -40,8 +40,8 @@ function shared_init()
   if state.music_muted then music.volume = 0 end
 
   fat_font = Font('FatPixelFont', 8)
-  pixul_font = Font('PixulBrush', 8)
-  chinese_font = Font('微软雅黑', 16)
+  pixul_font = Font('NotoSansSC-Regular', 16)
+  chinese_font = Font('NotoSansSC-Regular', 16)
   background_canvas = Canvas(gw, gh)
   main_canvas = Canvas(gw, gh, {stencil = true})
   shadow_canvas = Canvas(gw, gh)

@@ -594,10 +594,19 @@ Button = Object:extend()
 Button:implement(GameObject)
 function Button:init(args)
   self:init_game_object(args)
-  print(self.button_text)
-  self.shape = Rectangle(self.x, self.y, args.w or (chinese_font:get_text_width(self.button_text) + 8), chinese_font.h + 4)
+  
+  -- Check if text contains Chinese characters
+  local has_chinese = false
+  if self.button_text:match("[\228-\233][\128-\191][\128-\191]") then
+    has_chinese = true
+  end
+  
+  -- Choose font based on text content
+  self.font = has_chinese and chinese_font or pixul_font
+  
+  self.shape = Rectangle(self.x, self.y, args.w or (self.font:get_text_width(self.button_text) + 8), self.font.h + 4)
   self.interact_with_mouse = true
-  self.text = Text({{text = '[' .. self.fg_color .. ']' .. self.button_text, font = chinese_font, alignment = 'center'}}, global_text_tags)
+  self.text = Text({{text = '[' .. self.fg_color .. ']' .. self.button_text, font = self.font, alignment = 'center'}}, global_text_tags)
 end
 
 
@@ -655,7 +664,7 @@ function Button:on_mouse_enter()
   ui_hover1:play{pitch = random:float(1.3, 1.5), volume = 0.5}
   pop2:play{pitch = random:float(0.95, 1.05), volume = 0.5}
   self.selected = true
-  self.text:set_text{{text = '[fgm5]' .. self.button_text, font = pixul_font, alignment = 'center'}}
+  self.text:set_text{{text = '[fgm5]' .. self.button_text, font = self.font, alignment = 'center'}}
   self.spring:pull(0.2, 200, 10)
   if self.mouse_enter then self:mouse_enter() end
 end
@@ -663,7 +672,7 @@ end
 
 function Button:on_mouse_exit()
   if main.current.in_credits and not self.credits_button then return end
-  self.text:set_text{{text = '[' .. self.fg_color .. ']' .. self.button_text, font = pixul_font, alignment = 'center'}}
+  self.text:set_text{{text = '[' .. self.fg_color .. ']' .. self.button_text, font = self.font, alignment = 'center'}}
   self.selected = false
   if self.mouse_exit then self:mouse_exit() end
 end
@@ -671,7 +680,7 @@ end
 
 function Button:set_text(text)
   self.button_text = text
-  self.text:set_text{{text = '[' .. self.fg_color .. ']' .. self.button_text, font = pixul_font, alignment = 'center'}}
+  self.text:set_text{{text = '[' .. self.fg_color .. ']' .. self.button_text, font = self.font, alignment = 'center'}}
   self.spring:pull(0.2, 200, 10)
 end
 

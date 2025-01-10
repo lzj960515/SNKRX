@@ -168,7 +168,6 @@ end
 
 function Text:parse(text_data)
   for _, line in ipairs(text_data) do
-    print(line.text)
     local tags = {}
     for i, tags_text, j in line.text:gmatch("()%[(.-)%]()") do
       if tags_text == "" then
@@ -187,18 +186,22 @@ function Text:parse(text_data)
   for _, line in ipairs(text_data) do
     line.characters = {}
     local current_tags = nil
-    for i = 1, #line.text do
-      local c = line.text:sub(i, i)
+    for pos, code in utf8.codes(line.text) do
+      local c = utf8.char(code)
       local inside_tags = false
-      for _, tag in ipairs(line.tags) do
-        if i >= tag.i and i <= tag.j then
+      for _, tag in ipairs(line.tags or {}) do
+        if pos >= tag.i and pos <= tag.j then
           inside_tags = true
           current_tags = tag.tags
           break
         end
       end
       if not inside_tags then
-        table.insert(line.characters, {character = c, visible = true, tags = current_tags or {}})
+        table.insert(line.characters, {
+          character = c,
+          visible = true,
+          tags = current_tags or {}
+        })
       end
     end
   end
