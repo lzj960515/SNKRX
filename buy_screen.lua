@@ -68,11 +68,11 @@ function BuyScreen:on_enter(from, level, loop, units, passives, shop_level, shop
   self:set_party_and_sets()
   self:set_items()
 
-  self.shop_text = Text({{text = '[wavy_mid, fg]shop [fg]- gold: [yellow]' .. gold, font = pixul_font, alignment = 'center'}}, global_text_tags)
-  self.party_text = Text({{text = '[wavy_mid, fg]party ' .. tostring(#units) .. '/' .. tostring(max_units), font = pixul_font, alignment = 'center'}}, global_text_tags)
-  self.sets_text = Text({{text = '[wavy_mid, fg]classes', font = pixul_font, alignment = 'center'}}, global_text_tags)
-  self.items_text = Text({{text = '[wavy_mid, fg]items', font = pixul_font, alignment = 'center'}}, global_text_tags)
-  self.ng_text = Text({{text = '[fg]NG+' .. current_new_game_plus, font = pixul_font, alignment = 'center'}}, global_text_tags)
+  self.shop_text = Text({{text = '[wavy_mid, fg]商店 [fg]- 金币: [yellow]' .. gold, font = pixul_font, alignment = 'center'}}, global_text_tags)
+  self.party_text = Text({{text = '[wavy_mid, fg]队伍 ' .. tostring(#units) .. '/' .. tostring(max_units), font = pixul_font, alignment = 'center'}}, global_text_tags)
+  self.sets_text = Text({{text = '[wavy_mid, fg]职业', font = pixul_font, alignment = 'center'}}, global_text_tags)
+  self.items_text = Text({{text = '[wavy_mid, fg]物品', font = pixul_font, alignment = 'center'}}, global_text_tags)
+  self.ng_text = Text({{text = '[fg]新周目+' .. current_new_game_plus, font = pixul_font, alignment = 'center'}}, global_text_tags)
   local get_elite_str = function(lvl)
     if (lvl-(25*self.loop)) % 6 == 0 or lvl % 25 == 0 then return ' (elite)'
     elseif (lvl-(25*self.loop)) % 3 == 0 then return ' (hard)'
@@ -87,15 +87,15 @@ function BuyScreen:on_enter(from, level, loop, units, passives, shop_level, shop
     self.in_tutorial = true
     self.title_text = Text2{group = self.tutorial, x = gw/2, y = 35, lines = {{text = '[fg]WELCOME TO SNKRX!', font = fat_font, alignment = 'center'}}}
     self.tutorial_text = Text2{group = self.tutorial, x = 228, y = 160, lines = {
-      {text = '[fg]You control a snake of multiple heroes that auto-attack nearby enemies.', font = pixul_font, height_multiplier = 1.2},
-      {text = '[fg]You can steer the snake left or right by pressing [yellow]A/D[fg] or [yellow]left/right arrows[fg].', font = pixul_font, height_multiplier = 2.2},
-      {text = '[fg]Combine the same heroes to level them up:', font = pixul_font, height_multiplier = 1.2},
-      {text = '[fg]At [yellow]Lv.3[fg] heroes unlock special effects.', font = pixul_font, height_multiplier = 2.2},
-      {text = '[fg]Hire heroes of the same classes to unlock class passives:', font = pixul_font, height_multiplier = 1.2},
-      {text = '[fg]Each hero can have between [yellow]1 to 3[fg] classes.', font = pixul_font, height_multiplier = 2.2},
-      {text = '[fg]You gain [yellow]1 interest per 5 gold[fg], up to a maximum of 5.', font = pixul_font, height_multiplier = 1.2},
-      {text = "[fg]This means that saving above [yellow]25 gold[fg] doesn't yield more interest.", font = pixul_font, height_multiplier = 2.2},
-      {text = "[yellow, wavy_mid]Good luck!", font = pixul_font, height_multiplier = 2.2, alignment = 'center'},
+      {text = '[fg]你控制一条由多个英雄组成的蛇，它们会自动攻击附近的敌人。', font = pixul_font, height_multiplier = 1.2},
+      {text = '[fg]你可以通过按[yellow]A/D键[fg]或[yellow]左/右方向键[fg]来控制蛇向左或向右移动。', font = pixul_font, height_multiplier = 2.2},
+      {text = '[fg]合并相同的英雄可以提升他们的等级：', font = pixul_font, height_multiplier = 1.2},
+      {text = '[fg]英雄在达到[yellow]3级[fg]时会解锁特殊效果。', font = pixul_font, height_multiplier = 2.2},
+      {text = '[fg]雇佣相同职业的英雄可以解锁职业被动技能：', font = pixul_font, height_multiplier = 1.2},
+      {text = '[fg]每个英雄可以拥有[yellow]1到3个[fg]职业。', font = pixul_font, height_multiplier = 2.2},
+      {text = '[fg]每[yellow]5金币[fg]可获得1点利息，最多5点利息。', font = pixul_font, height_multiplier = 1.2},
+      {text = '[fg]这意味着存款超过[yellow]25金币[fg]将不会获得更多利息。', font = pixul_font, height_multiplier = 2.2},
+      {text = '[yellow, wavy_mid]祝你好运！', font = pixul_font, height_multiplier = 2.2, alignment = 'center'},
     }}
 
     self.tutorial_cards = {}
@@ -318,7 +318,7 @@ function BuyScreen:buy(character, i)
       if not self.info_text then
         self.info_text = InfoText{group = main.current.ui}
         self.info_text:activate({
-          {text = '[fg]maximum number of units [yellow](' .. max_units .. ') [fg]reached', font = pixul_font, alignment = 'center'},
+          {text = '[fg]已达到最大单位数量 [yellow](' .. max_units .. ') [fg]', font = pixul_font, alignment = 'center'},
         }, nil, nil, nil, nil, 16, 4, nil, 2)
         self.info_text.x, self.info_text.y = gw - 140, gh - 20
       end
@@ -326,7 +326,7 @@ function BuyScreen:buy(character, i)
     else
       if gold >= character_tiers[character] then
         gold = gold - character_tiers[character]
-        self.shop_text:set_text{{text = '[wavy_mid, fg]shop [fg]- [fg, nudge_down]gold: [yellow, nudge_down]' .. gold, font = pixul_font, alignment = 'center'}}
+        self.shop_text:set_text{{text = '[wavy_mid, fg]商店 [fg]- [fg, nudge_down]金币: [yellow, nudge_down]' .. gold, font = pixul_font, alignment = 'center'}}
         table.insert(self.units, {character = character, level = 1, reserve = {0, 0}})
         bought = true
       end
@@ -339,7 +339,7 @@ end
 
 function BuyScreen:gain_gold(amount)
   gold = gold + amount or 0
-  self.shop_text:set_text{{text = '[wavy_mid, fg]shop [fg]- [fg, nudge_down]gold: [yellow, nudge_down]' .. gold, font = pixul_font, alignment = 'center'}}
+  self.shop_text:set_text{{text = '[wavy_mid, fg]商店 [fg]- [fg, nudge_down]金币: [yellow, nudge_down]' .. gold, font = pixul_font, alignment = 'center'}}
 end
 
 
@@ -910,13 +910,13 @@ function LevelButton:create_info_text()
     local t41, t42 = get_shop_odds(self.parent.shop_level, 4), get_shop_odds(self.parent.shop_level+1, 4)
     self.info_text = InfoText{group = main.current.ui}
     self.info_text:activate({
-      {text = '[yellow]Lv.' .. self.parent.shop_level .. '[fg] shop, XP: [yellow]' .. self.shop_xp .. '/' .. self.max_xp .. '[fg], +1 XP cost: [yellow]5', font = pixul_font, alignment = 'center', height_multiplier = 1.5},
-      {text = '[bg10]chances of units appearing on the shop', font = pixul_font, alignment = 'center', height_multiplier = 1.25},
-      {text = '[yellow]current shop level                  [fgm10]next shop level', font = pixul_font, alignment = 'left', height_multiplier = 1.25},
-      {text = '[fg]tier 1: ' .. t11 .. '%' .. tostring(t11 < 10 and '  ' or '') .. '                                 [fgm8]tier 1: ' .. t12 .. '%', font = pixul_font, alignment = 'left', height_multiplier = 1.25},
-      {text = '[green]tier 2: ' .. t21 .. '%' .. tostring(t21 < 10 and '  ' or '') .. '                                 [fgm6]tier 2: ' .. t22 .. '%', font = pixul_font, alignment = 'left', height_multiplier = 1.25},
-      {text = '[blue]tier 3: ' .. t31 .. '%' .. tostring(t31 < 10 and '  ' or '') .. '                                 [fgm4]tier 3: ' .. t32 .. '%', font = pixul_font, alignment = 'left', height_multiplier = 1.25},
-      {text = '[purple]tier 4: ' .. t41 .. '%' .. tostring(t41 < 10 and '  ' or '') .. '                                 [fgm2]tier 4: ' .. t42 .. '%', font = pixul_font, alignment = 'left', height_multiplier = 1.25},
+      {text = '[yellow]等级.' .. self.parent.shop_level .. '[fg] 商店, 经验值: [yellow]' .. self.shop_xp .. '/' .. self.max_xp .. '[fg], +1经验值花费: [yellow]5', font = pixul_font, alignment = 'center', height_multiplier = 1.5},
+      {text = '[bg10]单位在商店中出现的概率', font = pixul_font, alignment = 'center', height_multiplier = 1.25},
+      {text = '[yellow]当前商店等级                  [fgm10]下一商店等级', font = pixul_font, alignment = 'left', height_multiplier = 1.25},
+      {text = '[fg]一级: ' .. t11 .. '%' .. tostring(t11 < 10 and '  ' or '') .. '                                 [fgm8]一级: ' .. t12 .. '%', font = pixul_font, alignment = 'left', height_multiplier = 1.25},
+      {text = '[green]二级: ' .. t21 .. '%' .. tostring(t21 < 10 and '  ' or '') .. '                                 [fgm6]二级: ' .. t22 .. '%', font = pixul_font, alignment = 'left', height_multiplier = 1.25},
+      {text = '[blue]三级: ' .. t31 .. '%' .. tostring(t31 < 10 and '  ' or '') .. '                                 [fgm4]三级: ' .. t32 .. '%', font = pixul_font, alignment = 'left', height_multiplier = 1.25},
+      {text = '[purple]四级: ' .. t41 .. '%' .. tostring(t41 < 10 and '  ' or '') .. '                                 [fgm2]四级: ' .. t42 .. '%', font = pixul_font, alignment = 'left', height_multiplier = 1.25},
     }, nil, nil, nil, nil, 16, 4, nil, 2)
     self.info_text.x, self.info_text.y = gw/2, gh/2 - 45
   elseif self.parent.shop_level == 5 then
@@ -926,13 +926,13 @@ function LevelButton:create_info_text()
     local t41 = get_shop_odds(self.parent.shop_level, 4)
     self.info_text = InfoText{group = main.current.ui}
     self.info_text:activate({
-      {text = '[yellow]Lv.' .. self.parent.shop_level .. '[fg] shop', font = pixul_font, alignment = 'center', height_multiplier = 1.5},
-      {text = '[bg10]chances of units appearing on the shop', font = pixul_font, alignment = 'center', height_multiplier = 1.25},
-      {text = '[yellow]current shop level', font = pixul_font, alignment = 'left', height_multiplier = 1.25},
-      {text = '[fg]tier 1: ' .. t11 .. '%', font = pixul_font, alignment = 'left', height_multiplier = 1.25},
-      {text = '[green]tier 2: ' .. t21 .. '%', font = pixul_font, alignment = 'left', height_multiplier = 1.25},
-      {text = '[blue]tier 3: ' .. t31 .. '%', font = pixul_font, alignment = 'left', height_multiplier = 1.25},
-      {text = '[purple]tier 4: ' .. t41 .. '%', font = pixul_font, alignment = 'left', height_multiplier = 1.25},
+      {text = '[yellow]等级.' .. self.parent.shop_level .. '[fg] 商店', font = pixul_font, alignment = 'center', height_multiplier = 1.5},
+      {text = '[bg10]单位在商店中出现的概率', font = pixul_font, alignment = 'center', height_multiplier = 1.25},
+      {text = '[yellow]当前商店等级', font = pixul_font, alignment = 'left', height_multiplier = 1.25},
+      {text = '[fg]一级: ' .. t11 .. '%', font = pixul_font, alignment = 'left', height_multiplier = 1.25},
+      {text = '[green]二级: ' .. t21 .. '%', font = pixul_font, alignment = 'left', height_multiplier = 1.25},
+      {text = '[blue]三级: ' .. t31 .. '%', font = pixul_font, alignment = 'left', height_multiplier = 1.25},
+      {text = '[purple]四级: ' .. t41 .. '%', font = pixul_font, alignment = 'left', height_multiplier = 1.25},
     }, nil, nil, nil, nil, 16, 4, nil, 2)
     self.info_text.x, self.info_text.y = gw/2, gh/2 - 45
   end
@@ -1762,9 +1762,9 @@ function CharacterIcon:on_mouse_enter()
   self.info_text = InfoText{group = main.current.ui}
   self.info_text:activate({
     {text = '[' .. character_color_strings[self.character] .. ']' .. self.character:capitalize() .. '[fg] - cost: [yellow]' .. self.parent.cost, font = pixul_font, alignment = 'center', height_multiplier = 1.25},
-    {text = '[fg]Classes: ' .. character_class_strings[self.character], font = pixul_font, alignment = 'center', height_multiplier = 1.25},
+    {text = '[fg]职业: ' .. character_class_strings[self.character], font = pixul_font, alignment = 'center', height_multiplier = 1.25},
     {text = character_descriptions[self.character](1), font = pixul_font, alignment = 'center', height_multiplier = 2},
-    {text = '[' .. (self.level == 3 and 'yellow' or 'light_bg') .. ']Lv.3 [' .. (self.level == 3 and 'fg' or 'light_bg') .. ']Effect - ' .. 
+    {text = '[' .. (self.level == 3 and 'yellow' or 'light_bg') .. ']Lv.3 [' .. (self.level == 3 and 'fg' or 'light_bg') .. ']效果 - ' .. 
       (self.level == 3 and character_effect_names[self.character] or character_effect_names_gray[self.character]), font = pixul_font, alignment = 'center', height_multiplier = 1.25},
     {text = (self.level == 3 and character_effect_descriptions[self.character]() or character_effect_descriptions_gray[self.character]()), font = pixul_font, alignment = 'center'},
     -- {text = character_stats[self.character](1), font = pixul_font, alignment = 'center'},
